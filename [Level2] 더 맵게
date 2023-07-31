@@ -1,0 +1,19 @@
+# try1 -> solve
+# heapq를 사용해 쉽게 품
+# 시간이 오래 걸리길래 다른 방법이 있을줄 알았지만 다른 사람들 풀이도 비슷함
+
+import heapq
+
+def solution(scoville, K):
+    answer = 0
+    heapq.heapify(scoville)
+    
+    while True:
+        if len(scoville) < 2 and scoville[0] < K:
+            return -1
+        if scoville[0] >= K:
+            break
+        heapq.heappush(scoville, heapq.heappop(scoville) + heapq.heappop(scoville)*2)
+        answer += 1
+            
+    return answer

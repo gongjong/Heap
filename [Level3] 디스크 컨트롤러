@@ -1,1 +1,26 @@
+#try1-> 아에 감도 못잡아서 답을 보고 풀었다.
+# 완전 초반 풀이는 job시간에 따라 정렬하는 방법을 사용하였는데
+# 하드가 들어오는 시간과 가장 처음 실행해야하는 값등 예외처리의 실패로 다시 풀었다.
 
+import heapq as hp
+
+def solution(jobs):
+    answer, now, i = 0, 0, 0
+    start = -1
+    heap = []
+    
+    while i < len(jobs):
+        for job in jobs:
+            if start < job[0] <= now:
+                hp.heappush(heap, [job[1], job[0]])
+        
+        if len(heap):
+            curr = hp.heappop(heap)
+            start = now
+            now += curr[0]
+            answer += now - curr[1]
+            i += 1
+        else:
+            now += 1
+    
+    return answer//len(jobs)

@@ -1,0 +1,22 @@
+#try1.5 -> solve
+# heap을 handling할때 최대 값을 빼고 싶으면 배열을 정렬하고 pop을 하면 된다.
+
+import heapq as hp
+
+def solution(operations):
+    heap = []
+    
+    for oper in operations:
+        oper = oper.split(" ")
+        if oper[0] == 'I':
+            hp.heappush(heap, int(oper[1]))
+        else:
+            if heap:
+                if oper[1] == "1":
+                    heap.sort()
+                    heap.pop()
+                else:
+                    hp.heappop(heap)
+    
+    heap.sort()    
+    return [heap[-1], heap[0]] if heap else [0, 0]
